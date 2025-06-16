@@ -1,24 +1,10 @@
-name: Daily Commit
-
-on:
-  schedule:
-    - cron: '25 6 * * *'  # Runs daily at 06:25 UTC (adjust if needed)
-  workflow_dispatch:       # Allows manual trigger from GitHub
-
-jobs:
-  update-commit:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Update status file - 22f2001290@ds.study.iitm.ac.in
-        run: |
-          echo "Updated on $(date)" >> daily_log.txt
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "22f2001290@ds.study.iitm.ac.in"
-          git add daily_log.txt
-          git commit -m "Daily update: $(date)"
-          git push
-Updated on Mon Jun 16 09:55:22 AM IST 2025
+- name: Update status file - 22f2001290@ds.study.iitm.ac.in
+  run: |
+    echo "Updated on $(date)" >> daily_log.txt
+    git config --global user.name "github-actions[bot]"
+    git config --global user.email "22f2001290@ds.study.iitm.ac.in"
+    git add daily_log.txt
+    git commit -m "Daily update: $(date)" || echo "No changes to commit"
+    git push
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
