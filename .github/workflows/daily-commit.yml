@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Update status file
+      - name: Update status file - 22f2001290@ds.study.iitm.ac.in
         run: |
           echo "Updated on $(date)" >> daily_log.txt
           git config --global user.name "github-actions[bot]"
