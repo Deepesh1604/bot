@@ -1,1 +1,1 @@
-# daily-commit-bot
+#bot
