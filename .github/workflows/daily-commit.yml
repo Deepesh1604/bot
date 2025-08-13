@@ -1,90 +1,90 @@
-# name: Daily Random Commits
-# on:
-#   schedule:
-#     - cron: '25 6 * * *'  # Every day at 06:25 UTC
-#   workflow_dispatch:       # For manual runs
+name: Daily Random Commits
+on:
+  schedule:
+    - cron: '25 6 * * *'  # Every day at 06:25 UTC
+  workflow_dispatch:       # For manual runs
 
-# jobs:
-#   random-commits:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v4
+jobs:
+  random-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
         
-#       - name: Configure Git
-#         run: |
-#           git config --global user.name "github-actions[bot]"
-#           git config --global user.email "22f2001290@ds.study.iitm.ac.in"
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "22f2001290@ds.study.iitm.ac.in"
       
-#       - name: Generate Random Commits
-#         run: |
-#           # Array of commit messages
-#           messages=(
-#             "Update documentation"
-#             "Fix minor bug"
-#             "Refactor code structure"
-#             "Add new feature"
-#             "Optimize performance"
-#             "Update dependencies"
-#             "Clean up codebase"
-#             "Improve error handling"
-#             "Add unit tests"
-#             "Update README"
-#             "Fix typos"
-#             "Enhance user interface"
-#             "Add logging functionality"
-#             "Update configuration"
-#             "Implement security fix"
-#             "Add code comments"
-#             "Optimize database queries"
-#             "Update API endpoints"
-#             "Fix compatibility issues"
-#             "Add validation checks"
-#             "Improve code readability"
-#             "Update build process"
-#             "Add environment variables"
-#             "Fix edge case handling"
-#             "Update styling"
-#             "Add error messages"
-#             "Optimize memory usage"
-#             "Update package versions"
-#             "Add feature flags"
-#             "Improve accessibility"
-#           )
+      - name: Generate Random Commits
+        run: |
+          # Array of commit messages
+          messages=(
+            "Update documentation"
+            "Fix minor bug"
+            "Refactor code structure"
+            "Add new feature"
+            "Optimize performance"
+            "Update dependencies"
+            "Clean up codebase"
+            "Improve error handling"
+            "Add unit tests"
+            "Update README"
+            "Fix typos"
+            "Enhance user interface"
+            "Add logging functionality"
+            "Update configuration"
+            "Implement security fix"
+            "Add code comments"
+            "Optimize database queries"
+            "Update API endpoints"
+            "Fix compatibility issues"
+            "Add validation checks"
+            "Improve code readability"
+            "Update build process"
+            "Add environment variables"
+            "Fix edge case handling"
+            "Update styling"
+            "Add error messages"
+            "Optimize memory usage"
+            "Update package versions"
+            "Add feature flags"
+            "Improve accessibility"
+          )
           
-#           # Generate random number of commits (1-4)
-#           num_commits=$((RANDOM % 4 + 1))
-#           echo "Making $num_commits commits today"
+          # Generate random number of commits (1-4)
+          num_commits=$((RANDOM % 4 + 1))
+          echo "Making $num_commits commits today"
           
-#           for i in $(seq 1 $num_commits); do
-#             # Select random message
-#             message_index=$((RANDOM % ${#messages[@]}))
-#             commit_message="${messages[$message_index]}"
+          for i in $(seq 1 $num_commits); do
+            # Select random message
+            message_index=$((RANDOM % ${#messages[@]}))
+            commit_message="${messages[$message_index]}"
             
-#             # Create a unique file or update existing one
-#             timestamp=$(date +"%Y%m%d_%H%M%S")
-#             filename="activity_${timestamp}_${i}.txt"
+            # Create a unique file or update existing one
+            timestamp=$(date +"%Y%m%d_%H%M%S")
+            filename="activity_${timestamp}_${i}.txt"
             
-#             # Add some random content
-#             echo "Activity log - Commit #$i on $(date)" > "$filename"
-#             echo "Random data: $RANDOM" >> "$filename"
-#             echo "Commit message: $commit_message" >> "$filename"
+            # Add some random content
+            echo "Activity log - Commit #$i on $(date)" > "$filename"
+            echo "Random data: $RANDOM" >> "$filename"
+            echo "Commit message: $commit_message" >> "$filename"
             
-#             # Also update the main daily log
-#             echo "$(date): $commit_message" >> daily_log.txt
+            # Also update the main daily log
+            echo "$(date): $commit_message" >> daily_log.txt
             
-#             # Add and commit
-#             git add .
-#             git commit -m "$commit_message: $(date +"%Y-%m-%d %H:%M")" || echo "No changes for commit $i"
+            # Add and commit
+            git add .
+            git commit -m "$commit_message: $(date +"%Y-%m-%d %H:%M")" || echo "No changes for commit $i"
             
-#             # Random delay between commits (1-30 minutes)
-#             if [ $i -lt $num_commits ]; then
-#               sleep_time=$((RANDOM % 1800 + 60))  # 1-30 minutes in seconds
-#               echo "Waiting ${sleep_time} seconds before next commit..."
-#               sleep $sleep_time
-#             fi
-#           done
+            # Random delay between commits (1-30 minutes)
+            if [ $i -lt $num_commits ]; then
+              sleep_time=$((RANDOM % 1800 + 60))  # 1-30 minutes in seconds
+              echo "Waiting ${sleep_time} seconds before next commit..."
+              sleep $sleep_time
+            fi
+          done
           
-#       - name: Push all commits
-#         run: |
-#           git push origin main || git push origin master
+      - name: Push all commits
+        run: |
+          git push origin main || git push origin master
